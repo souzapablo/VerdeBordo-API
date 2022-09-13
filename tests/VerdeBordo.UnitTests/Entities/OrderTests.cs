@@ -8,7 +8,7 @@ namespace VerdeBordo.UnitTests.Entities
             // Arange
             Client client = new Client("Cliente", "@cliente");
             Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
-            Embroidery embroidery = new("Novo bordado", 2_25);
+            Embroidery embroidery = new("Novo bordado", 2.25m);
 
             // Act
             order.AddEmbroidery(embroidery);
@@ -24,7 +24,7 @@ namespace VerdeBordo.UnitTests.Entities
             // Arange
             Client client = new Client("Cliente", "@cliente");
             Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
-            Payment payment = new(DateTime.Now, 2_25);
+            Payment payment = new(DateTime.Now, 2.25m);
 
             // Act
             order.AddPayment(payment);
@@ -40,16 +40,15 @@ namespace VerdeBordo.UnitTests.Entities
             // Arrange
             Client client = new Client("Cliente", "@cliente");
             Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
-            Payment payment = new(DateTime.Now, 2_25);
-            Embroidery embroidery = new("Novo bordado", 2_25);
+            Embroidery embroidery = new("Novo bordado", 2.25m);
             order.AddEmbroidery(embroidery);
 
             // Act
-            order.SetDeliveryFee(2_50);
+            order.SetDeliveryFee(2.50m);
 
             // Assert
-            order.DeliveryFee.Should().Be(2_50);
-            order.OrderPrice.Should().Be(4_75);
+            order.DeliveryFee.Should().Be(2.50m);
+            order.OrderPrice.Should().Be(4.75m);
         }
 
         [Fact]
