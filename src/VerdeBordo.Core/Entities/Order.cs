@@ -36,7 +36,7 @@ namespace VerdeBordo.Core.Entities
         public bool PromptDelivery { get; private set; }
         public decimal PayedAmount { get; private set; }
         public OrderStatus OrderStatus { get; private set; }
-        public DateTime DeliveredAt { get; private set; }
+        public DateTime? DeliveredAt { get; private set; }
 
         #endregion
 
