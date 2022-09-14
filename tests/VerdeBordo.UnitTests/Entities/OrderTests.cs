@@ -6,8 +6,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidEmbroidery_When_AddedToOrderEmbroideriesList_Should_UpdateOrderPrice()
         {
             // Arange
-            Client client = new Client("Cliente", "@cliente");
-            Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
             Embroidery embroidery = new("Novo bordado", 2.25m);
 
             // Act
@@ -22,8 +21,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidPayment_When_AddedToOrderPaymentList_Should_IncreasePayedAmount()
         {
             // Arange
-            Client client = new Client("Cliente", "@cliente");
-            Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
             Payment payment = new(DateTime.Now, 2.25m);
 
             // Act
@@ -38,8 +36,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_NotNullDeliveryFee_When_DeliveryFeeIsAdded_Should_IncreaseOrderPrive()
         {
             // Arrange
-            Client client = new Client("Cliente", "@cliente");
-            Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
             Embroidery embroidery = new("Novo bordado", 2.25m);
             order.AddEmbroidery(embroidery);
 
@@ -55,8 +52,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidStatus_When_DeliveryIsRecorded_Should_ChangeStatus()
         {
             // Arrange
-            Client client = new Client("Cliente", "@cliente");
-            Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
             order.SetStatus(OrderStatus.Delivering);
 
             // Act
@@ -71,8 +67,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AnInvalidStatus_When_DeliveryIsRecorded_Should_ThrowInvalidStatusExceptions()
         {
             // Arrange
-            Client client = new Client("Cliente", "@cliente");
-            Order order = new(DateTime.Now, client, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
 
             // Act
             Action action = () => order.DeliverOrder(new DateTime(2022, 9, 12));

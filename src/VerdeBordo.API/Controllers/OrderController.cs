@@ -10,7 +10,7 @@ namespace VerdeBordo.API.Controllers
     [Route("api/v1/orders")]
     public class OrderController : BaseController
     {
-        private static List<Order> orderList = new() { new Order(DateTime.Now, new Client("Cliente", "@cliente"), Core.Enums.PaymentMethod.BankTransfer, false) };
+        private static List<Order> orderList = new() { new Order(DateTime.Now, 1, Core.Enums.PaymentMethod.BankTransfer, false) };
 
         [HttpGet]
         public IActionResult GetAll()

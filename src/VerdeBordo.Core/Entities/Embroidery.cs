@@ -1,6 +1,6 @@
 namespace VerdeBordo.Core.Entities
 {
-    public class Embroidery
+    public class Embroidery : BaseEntity
     {
         
         #region Constructors

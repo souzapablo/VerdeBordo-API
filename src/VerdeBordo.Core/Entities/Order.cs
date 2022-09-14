@@ -9,10 +9,10 @@ namespace VerdeBordo.Core.Entities
 
         #region Constructors
 
-        public Order(DateTime orderDate, Client client, PaymentMethod paymentMethod, bool promptDelivery, decimal? deliveryFee = null)
+        public Order(DateTime orderDate, int clientId, PaymentMethod paymentMethod, bool promptDelivery, decimal? deliveryFee = null)
         {
             OrderDate = orderDate;
-            Client = client;
+            ClientId = clientId;
             PaymentMethod = paymentMethod;
             PromptDelivery = promptDelivery;
             DeliveryFee = deliveryFee;
@@ -27,7 +27,8 @@ namespace VerdeBordo.Core.Entities
         #region Properties
 
         public DateTime OrderDate { get; private set; }
-        public Client Client { get; private set; }
+        public int ClientId { get; private set; }
+        public Client? Client { get; private set; }
         public List<Embroidery> Embroideries { get; private set; }
         public decimal OrderPrice { get; private set; }
         public decimal? DeliveryFee { get; private set; }

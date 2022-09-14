@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using VerdeBordo.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("VerdeBordoCs");
+builder.Services.AddDbContext<VerdeBordoDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,6 +1,6 @@
 namespace VerdeBordo.Core.Entities
 {
-    public class Payment
+    public class Payment : BaseEntity
     {
         public Payment(DateTime paymentDate, decimal paymentValue)
         {
