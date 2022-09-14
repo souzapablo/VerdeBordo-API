@@ -1,8 +1,10 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
+using VerdeBordo.Application.Features.Orders.Queries.GetOrderById;
 using VerdeBordo.Controllers.Responses;
-using VerdeBordo.Core.Entities;
 
 namespace VerdeBordo.API.Controllers
 {
@@ -10,19 +12,26 @@ namespace VerdeBordo.API.Controllers
     [Route("api/v1/orders")]
     public class OrderController : BaseController
     {
-        private static List<Order> orderList = new() { new Order(DateTime.Now, 1, Core.Enums.PaymentMethod.BankTransfer, false) };
+        private readonly IMediator _mediator;
+        
+        public OrderController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return CreateCustomResponse<SuccessResponse>(orderList);
+            var order = await _mediator.Send(new GetAllOrdersQuery());
+            
+            return CreateCustomResponse<SuccessResponse>(order);
         }
 
         
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var order = orderList.FirstOrDefault(x => x.Id == id);
+            var order = await _mediator.Send(new GetOrderByIdQuery(id));
 
             if (order is null)
                 return CreateCustomResponse<NotFoundResponse>(id);

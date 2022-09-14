@@ -1,5 +1,9 @@
 global using FluentAssertions;
+global using Moq;
+global using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
 global using VerdeBordo.Core.Entities; 
 global using VerdeBordo.Core.Enums;
 global using VerdeBordo.Core.Exceptions; 
+global using VerdeBordo.Core.Persistence.Interfaces;
+global using VerdeBordo.UnitTests.Mocks;
 global using Xunit;

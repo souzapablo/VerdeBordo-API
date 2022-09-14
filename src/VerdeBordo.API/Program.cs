@@ -1,11 +1,17 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
+using VerdeBordo.Core.Persistence.Interfaces;
 using VerdeBordo.Infrastructure.Persistence;
+using VerdeBordo.Infrastructure.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("VerdeBordoCs");
 builder.Services.AddDbContext<VerdeBordoDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddMediatR(typeof(GetAllOrdersQuery));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

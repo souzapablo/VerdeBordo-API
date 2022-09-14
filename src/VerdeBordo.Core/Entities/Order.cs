@@ -9,12 +9,18 @@ namespace VerdeBordo.Core.Entities
 
         #region Constructors
 
+        public Order() 
+        {
+            Embroideries = new();
+            Payments = new();
+        }
+        
         public Order(DateTime orderDate, int clientId, PaymentMethod paymentMethod, bool promptDelivery, decimal? deliveryFee = null)
         {
             OrderDate = orderDate;
             ClientId = clientId;
             PaymentMethod = paymentMethod;
-            PromptDelivery = promptDelivery;
+            IsPromptDelivery = promptDelivery;
             DeliveryFee = deliveryFee;
             OrderStatus = OrderStatus.Created;
 
@@ -34,7 +40,7 @@ namespace VerdeBordo.Core.Entities
         public decimal? DeliveryFee { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
         public List<Payment> Payments { get; private set; }
-        public bool PromptDelivery { get; private set; }
+        public bool IsPromptDelivery { get; private set; }
         public decimal PayedAmount { get; private set; }
         public OrderStatus OrderStatus { get; private set; }
         public DateTime? DeliveredAt { get; private set; }
