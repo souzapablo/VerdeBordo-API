@@ -25,7 +25,8 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetAllOrders
                 OrderDate = x.OrderDate,
                 OrderPrice = x.OrderPrice,
                 DeliveryFee = x.DeliveryFee,
-                Status = EnumExtensions<OrderStatus>.GetDescription(x.OrderStatus)
+                Status = EnumExtensions<OrderStatus>.GetDescription(x.OrderStatus),
+                IsDeleted = x.IsDeleted
             }).ToList();
         }
     }

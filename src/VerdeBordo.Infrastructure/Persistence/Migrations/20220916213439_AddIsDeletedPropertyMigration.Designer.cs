@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VerdeBordo.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VerdeBordo.Infrastructure.Persistence;
 namespace VerdeBordo.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(VerdeBordoDbContext))]
-    partial class VerdeBordoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220916213439_AddIsDeletedPropertyMigration")]
+    partial class AddIsDeletedPropertyMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

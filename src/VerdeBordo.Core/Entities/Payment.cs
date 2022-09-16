@@ -1,3 +1,5 @@
+using VerdeBordo.Core.Entities.Base;
+
 namespace VerdeBordo.Core.Entities
 {
     public class Payment : BaseEntity

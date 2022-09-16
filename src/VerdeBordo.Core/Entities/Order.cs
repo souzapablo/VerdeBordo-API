@@ -1,3 +1,4 @@
+using VerdeBordo.Core.Entities.Base;
 using VerdeBordo.Core.Enums;
 using VerdeBordo.Core.Exceptions;
 

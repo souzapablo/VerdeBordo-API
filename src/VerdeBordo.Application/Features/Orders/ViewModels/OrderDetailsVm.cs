@@ -21,5 +21,6 @@ namespace VerdeBordo.Application.Features.Orders.ViewModels
         public DateTime? DeliveredAt { get; set; }
         public string PaymentMethod { get; set; } = null!;
         public decimal? DeliveryFee { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

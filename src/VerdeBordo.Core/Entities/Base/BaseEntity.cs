@@ -1,4 +1,4 @@
-namespace VerdeBordo.Core.Entities
+namespace VerdeBordo.Core.Entities.Base
 {
     public class BaseEntity
     {
@@ -16,6 +16,7 @@ namespace VerdeBordo.Core.Entities
 
         public int Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public bool IsDeleted { get; private set; }
 
         #endregion
     }

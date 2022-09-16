@@ -40,7 +40,8 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetOrderById
                 DeliveredAt = order.DeliveredAt,
                 PaymentMethod = EnumExtensions<PaymentMethod>.GetDescription(order.PaymentMethod),
                 DeliveryFee = order.DeliveryFee,
-                ClientName = client.Name
+                ClientName = client.Name,
+                IsDeleted = order.IsDeleted
             };
         }
     }
