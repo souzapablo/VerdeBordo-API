@@ -38,5 +38,29 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             // Assert
             _orderRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Order>()), Times.Once);
         }
+
+        [Fact]
+        public async Task Given_AnInvalidClientId_When_CommandIsExecuted_ReturnNullWithMessageError()
+        {
+            // Arrange
+            PostOrderCommand command = new()
+            {
+                OrderDate = DateTime.Now,
+                ClientId = 1,
+                PaymentMethod = PaymentMethod.BankTransfer,
+                IsPromptDelivery = false,
+                DeliveryFee = 24m
+            };
+
+            _clientRepositoryMock.Setup(x => x.ExistAsync(1))
+                .ReturnsAsync(false);
+
+            // Act
+            var result = await _commandHandler.Handle(command, new CancellationToken());
+
+            // Assert
+            _messageHandlerMock.Object.HasMessage.Should().Be(true);
+            _messageHandlerMock.Object.Messages.Should().Contain(x => x.Value == $"Cliente com o Id {command.ClientId} não encontrado.");
+        }        
     }
 }

@@ -37,12 +37,6 @@ namespace VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand
 
         private async Task Validate(PostOrderCommand request)
         {
-            var validation = new PostOrderCommandValidator().Validate(request);
-
-            if (!validation.IsValid)
-            {
-                return;
-            }
             var clientExist = await _clientRepository.ExistAsync(request.ClientId);
 
             if (!clientExist)
