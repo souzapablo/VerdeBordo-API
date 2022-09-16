@@ -2,7 +2,7 @@ using MediatR;
 using VerdeBordo.Application.Features.Orders.ViewModels;
 using VerdeBordo.Core.Enums;
 using VerdeBordo.Core.Extensions;
-using VerdeBordo.Core.Persistence.Interfaces;
+using VerdeBordo.Core.Interfaces.Repositories;
 
 namespace VerdeBordo.Application.Features.Orders.Queries.GetAllOrders
 {

@@ -13,16 +13,6 @@ namespace VerdeBordo.Infrastructure.Persistence.Repositories.Base
             _dbContext = dbContext;
         }
 
-        public Task<T> AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbContext.Set<T>().ToListAsync();
@@ -34,7 +24,27 @@ namespace VerdeBordo.Infrastructure.Persistence.Repositories.Base
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task AddAsync(T entity)
+        {
+            await _dbContext.Set<T>().AddAsync(entity);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistAsync(int id)
+        {
+            var entity = await _dbContext.Set<T>()
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            return entity is not null ? true : false;
+        }
+
         public Task UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(T entity)
         {
             throw new NotImplementedException();
         }

@@ -20,7 +20,7 @@ namespace VerdeBordo.Core.Entities
             OrderDate = orderDate;
             ClientId = clientId;
             PaymentMethod = paymentMethod;
-            IsPromptDelivery = promptDelivery;
+            PromptDelivery = promptDelivery;
             DeliveryFee = deliveryFee;
             OrderStatus = OrderStatus.Created;
 
@@ -40,7 +40,7 @@ namespace VerdeBordo.Core.Entities
         public decimal? DeliveryFee { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
         public List<Payment> Payments { get; private set; }
-        public bool IsPromptDelivery { get; private set; }
+        public bool PromptDelivery { get; private set; }
         public decimal PayedAmount { get; private set; }
         public OrderStatus OrderStatus { get; private set; }
         public DateTime? DeliveredAt { get; private set; }

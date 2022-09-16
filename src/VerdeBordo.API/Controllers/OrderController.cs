@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand;
 using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
 using VerdeBordo.Application.Features.Orders.Queries.GetOrderById;
 using VerdeBordo.Controllers.Responses;
@@ -20,7 +21,7 @@ namespace VerdeBordo.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
             var order = await _mediator.Send(new GetAllOrdersQuery());
             
@@ -28,15 +29,26 @@ namespace VerdeBordo.API.Controllers
         }
 
         
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetById(int orderId)
         {
-            var order = await _mediator.Send(new GetOrderByIdQuery(id));
+            var order = await _mediator.Send(new GetOrderByIdQuery(orderId));
 
             if (order is null)
-                return CreateCustomResponse<NotFoundResponse>(id);
+                return CreateCustomResponse<NotFoundResponse>(orderId);
 
             return CreateCustomResponse<SuccessResponse>(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostOrderAsync([FromBody] PostOrderCommand command)
+        {
+            var orderId = await _mediator.Send(command);
+
+            if (orderId is null)
+                return CreateCustomResponse<NotFoundResponse>(orderId.HasValue);
+
+            return CreatedAtAction(nameof(GetById), new {OrderId = orderId}, command);
         }
     }
 }

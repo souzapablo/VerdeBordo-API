@@ -15,7 +15,7 @@ namespace VerdeBordo.UnitTests.Mocks
                 .RuleFor(o => o.DeliveryFee, o => o.Finance.Amount(0, 15, 2))
                 .RuleFor(o => o.PaymentMethod, o => o.Random.Enum<PaymentMethod>())
                 .RuleFor(o => o.Payments, new List<Payment>())
-                .RuleFor(o => o.IsPromptDelivery, o => o.Random.Bool())
+                .RuleFor(o => o.PromptDelivery, o => o.Random.Bool())
                 .RuleFor(o => o.PayedAmount, o => o.Finance.Amount(1, 1000, 2))
                 .RuleFor(o => o.OrderStatus, o => o.Random.Enum<OrderStatus>());
 
