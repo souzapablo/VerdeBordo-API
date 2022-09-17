@@ -72,9 +72,6 @@ namespace VerdeBordo.Core.Entities
 
         public void DeliverOrder(DateTime delivereAt)
         {
-            if (OrderStatus is not OrderStatus.Delivering)
-                throw new InvalidStatusException(OrderStatus);
-
             DeliveredAt = delivereAt;
             SetStatus(OrderStatus.Delivered);
         }

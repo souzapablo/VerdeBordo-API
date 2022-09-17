@@ -62,19 +62,5 @@ namespace VerdeBordo.UnitTests.Entities
             order.OrderStatus.Should().Be(OrderStatus.Delivered);
             order.DeliveredAt.Should().Be(new DateTime(2022, 9, 12));
         }
-
-        [Fact]
-        public void Given_AnInvalidStatus_When_DeliveryIsRecorded_Should_ThrowInvalidStatusExceptions()
-        {
-            // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
-
-            // Act
-            Action action = () => order.DeliverOrder(new DateTime(2022, 9, 12));
-
-            // Assert
-            action.Should().Throw<InvalidStatusException>()
-                .WithMessage($"Status {order.OrderStatus} inválido.");
-        }        
     }
 }

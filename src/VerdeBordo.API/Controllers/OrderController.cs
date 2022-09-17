@@ -5,6 +5,7 @@ using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
 using VerdeBordo.Application.Features.Orders.Commands.DeleteOrder;
 using VerdeBordo.Application.Features.Orders.Commands.PostOrder;
+using VerdeBordo.Application.Features.Orders.Commands.UpdateOrderStatus;
 using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
 using VerdeBordo.Application.Features.Orders.Queries.GetOrderById;
 using VerdeBordo.Controllers.Responses;
@@ -83,13 +84,33 @@ namespace VerdeBordo.API.Controllers
         /// <returns></returns>
         /// <param name="orderId">Id do pedido a ser deletado</param>
         /// <response code="204">Pedido deletado com sucesso</response>
-        /// <response code="404">Pedido não encontrado ou já havia sido deletado </response>
+        /// <response code="400">Pedido não encontrado ou já havia sido deletado </response>
         [HttpDelete("{orderId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteOrderAsync(int orderId)
         {
             var result = await _mediator.Send(new DeleteOrderCommand(orderId));
+
+            return CreateCustomResponse<NoContentResponse>(result);
+        }
+
+        /// <summary>
+        /// Atualiza status de um pedido
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="orderId">Id do pedido a ser atualiazdo</param>
+        /// <param name="command">Objeto para atualização do pedido contendo novo status e data de entrega, quando necessária</param>
+        /// <response code="204">Pedido atualizado com sucesso</response>
+        /// <response code="400">Atualização de pedido não realizada </response>
+        [HttpPatch("{orderId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateOrderStatusAsync(int orderId, [FromBody] UpdateOrderStatusCommand command)
+        {
+            command.OrderId = orderId;
+
+            var result = await _mediator.Send(command);
 
             return CreateCustomResponse<NoContentResponse>(result);
         }
