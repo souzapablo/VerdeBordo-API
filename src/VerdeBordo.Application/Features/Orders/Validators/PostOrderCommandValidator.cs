@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand;
+using VerdeBordo.Application.Features.Orders.Commands.PostOrder;
 
 namespace VerdeBordo.Application.Features.Orders.Validators
 {
@@ -18,9 +18,6 @@ namespace VerdeBordo.Application.Features.Orders.Validators
 
             RuleFor(x => x.OrderDate)
                 .NotEmpty().WithMessage("A data do pedido deve ser informada.");
-
-            RuleFor(x => x.IsPromptDelivery)
-                .NotEmpty().WithMessage("É necessário informar se o pedido é pronta entrega.");
 
             When(x => x.DeliveryFee.HasValue, () =>
             {

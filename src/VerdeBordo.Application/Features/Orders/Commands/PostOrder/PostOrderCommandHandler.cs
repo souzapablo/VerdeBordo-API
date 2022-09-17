@@ -1,11 +1,10 @@
 using MediatR;
-using VerdeBordo.Application.Features.Orders.Validators;
 using VerdeBordo.Core.Entities;
 using VerdeBordo.Core.Exceptions;
 using VerdeBordo.Core.Interfaces.Messages;
 using VerdeBordo.Core.Interfaces.Repositories;
 
-namespace VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand
+namespace VerdeBordo.Application.Features.Orders.Commands.PostOrder
 {
     public class PostOrderCommandHandler : IRequestHandler<PostOrderCommand, int?>
     {

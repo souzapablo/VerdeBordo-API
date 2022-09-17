@@ -1,5 +1,4 @@
-using VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand;
-using VerdeBordo.Core.Interfaces.Repositories;
+using VerdeBordo.Application.Features.Orders.Commands.PostOrder;
 using VerdeBordo.Infrastructure.Common;
 
 namespace VerdeBordo.UnitTests.Features.Orders.Commands

@@ -1,5 +1,3 @@
-using VerdeBordo.Core.Interfaces.Repositories;
-
 namespace VerdeBordo.UnitTests.Features.Orders.Queries
 {
     public class GetAllOrdersQueryHandlerTests

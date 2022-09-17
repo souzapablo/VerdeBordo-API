@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using VerdeBordo.Core.Entities;
 using VerdeBordo.Core.Interfaces.Repositories;
 using VerdeBordo.Infrastructure.Persistence.Repositories.Base;

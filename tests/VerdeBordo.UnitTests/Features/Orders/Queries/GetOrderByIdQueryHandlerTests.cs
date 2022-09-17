@@ -1,6 +1,5 @@
 using VerdeBordo.Application.Features.Orders.Queries.GetOrderById;
 using VerdeBordo.Application.Features.Orders.ViewModels;
-using VerdeBordo.Core.Interfaces.Repositories;
 
 namespace VerdeBordo.UnitTests.Features.Orders.Queries
 {

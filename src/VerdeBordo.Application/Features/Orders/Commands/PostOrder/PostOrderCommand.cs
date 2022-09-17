@@ -1,7 +1,7 @@
 using MediatR;
 using VerdeBordo.Core.Enums;
 
-namespace VerdeBordo.Application.Features.Orders.Commands.PostOrderCommand
+namespace VerdeBordo.Application.Features.Orders.Commands.PostOrder
 {
     public class PostOrderCommand: IRequest<int?>
     {
