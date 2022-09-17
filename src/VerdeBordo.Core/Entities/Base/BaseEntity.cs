@@ -19,5 +19,11 @@ namespace VerdeBordo.Core.Entities.Base
         public bool IsDeleted { get; private set; }
 
         #endregion
+
+        #region Methods
+
+        public void SetIsDeleted(bool isDeleted) => IsDeleted = isDeleted;
+
+        #endregion
     }
 }

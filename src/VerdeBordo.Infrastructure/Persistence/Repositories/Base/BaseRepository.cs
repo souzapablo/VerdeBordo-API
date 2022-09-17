@@ -39,9 +39,10 @@ namespace VerdeBordo.Infrastructure.Persistence.Repositories.Base
             return entity is not null ? true : false;
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task DeleteAsync(T entity)

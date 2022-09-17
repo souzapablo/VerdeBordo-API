@@ -40,7 +40,7 @@ namespace VerdeBordo.Application.Features.Orders.Commands.PostOrder
 
             if (!clientExist)
             {
-                var exception = new ClientDoesNotExistException(request.ClientId);
+                var exception = new ClientNotFoundException(request.ClientId);
                 _messageHandler.AddMessage("001",exception.Message);
             }
         }

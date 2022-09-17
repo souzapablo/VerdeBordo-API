@@ -5,5 +5,6 @@ global using VerdeBordo.Core.Entities;
 global using VerdeBordo.Core.Enums;
 global using VerdeBordo.Core.Exceptions;
 global using VerdeBordo.Core.Interfaces.Repositories;
+global using VerdeBordo.Infrastructure.Common;
 global using VerdeBordo.UnitTests.Mocks;
 global using Xunit;

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Orders.Commands.DeleteOrder;
 using VerdeBordo.Application.Features.Orders.Commands.PostOrder;
 using VerdeBordo.Application.Features.Orders.Queries.GetAllOrders;
 using VerdeBordo.Application.Features.Orders.Queries.GetOrderById;
@@ -21,7 +22,6 @@ namespace VerdeBordo.API.Controllers
         {
             _mediator = mediator;
         }
-    #pragma warning restore
 
         /// <summary>
         /// Lista todos os pedidos
@@ -75,6 +75,23 @@ namespace VerdeBordo.API.Controllers
                 return CreateCustomResponse<BadRequestResponse>(orderId.HasValue);
 
             return CreatedAtAction(nameof(GetById), new {OrderId = orderId}, command);
+        }
+
+        /// <summary>
+        /// Deleta logicamente um pedido
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="orderId">Id do pedido a ser deletado</param>
+        /// <response code="204">Pedido deletado com sucesso</response>
+        /// <response code="404">Pedido não encontrado ou já havia sido deletado </response>
+        [HttpDelete("{orderId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteOrderAsync(int orderId)
+        {
+            var result = await _mediator.Send(new DeleteOrderCommand(orderId));
+
+            return CreateCustomResponse<NoContentResponse>(result);
         }
     }
 }

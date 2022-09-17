@@ -58,7 +58,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             var result = await _commandHandler.Handle(command, new CancellationToken());
 
             // Assert
-            _messageHandlerMock.Object.HasMessage.Should().Be(true);
+            _messageHandlerMock.Object.HasMessage.Should().BeTrue();
             _messageHandlerMock.Object.Messages.Should().Contain(x => x.Value == $"Cliente com o Id {command.ClientId} não encontrado.");
         }        
     }
