@@ -23,7 +23,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
             order.SetDeliveryFee(2m);
             var client = new Client("Nelson", "@nelson");
 
-            _orderRepositoryMock.Setup(x => x.GetByIdAsync(1))
+            _orderRepositoryMock.Setup(x => x.GetByIdAsync(1, x => x.Payments))
                 .ReturnsAsync(order);
 
             _clientRepositoryMock.Setup(x => x.GetByIdAsync(2))
@@ -40,7 +40,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
             result?.IsPromptDelivery.Should().Be(true);
             result?.DeliveryFee.Should().Be(2m);
             result?.OrderStatus.Should().Be("Criado");
-            result?.OrderTotalValue.Should().Be(4m);
+            result?.OrderTotalValue.Should().Be(2m);
         }
 
         [Fact]

@@ -90,7 +90,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             // Assert
             _paymentRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Payment>()), Times.Never);
             _orderRepoistoryMock.Verify(x => x.UpdateAsync(order), Times.Never);
-            _messageHandlerMock.Object.Messages.Should().Contain(x => x.Value == $"Valor totaldo pedido já foi pago.");
+            _messageHandlerMock.Object.Messages.Should().Contain(x => x.Value == $"Valor total do pedido já foi pago.");
         }   
 
         [Fact]
