@@ -11,7 +11,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
         }
 
         [Fact]
-        public async Task Give_ThreeOrdersInDataBase_When_QueryIsExecuted_Should_ReturnThreeOrders()
+        public async Task Given_ThreeOrdersInDataBase_When_QueryIsExecuted_Should_ReturnThreeOrders()
         {
             // Arrange
             List<Order> orderList = new FakeOrder().Generate(3);
