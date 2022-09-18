@@ -35,9 +35,9 @@ namespace VerdeBordo.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync()
         {
-            var order = await _mediator.Send(new GetAllOrdersQuery());
+            var orders = await _mediator.Send(new GetAllOrdersQuery());
             
-            return CreateCustomResponse<SuccessResponse>(order);
+            return CreateCustomResponse<SuccessResponse>(orders);
         }
 
         /// <summary>
