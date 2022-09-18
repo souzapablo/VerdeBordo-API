@@ -43,10 +43,10 @@ namespace VerdeBordo.API.Controllers
         /// <summary>
         /// Busca o pedido pelo Id
         /// </summary>
-        /// <returns>Pedidos cadastrados</returns>
+        /// <returns>Detalhes do pedido</returns>
         /// <param name="orderId">Id do pedido a ser encontrado</param>
-        /// <response code="200">Retorna o pedido encontrado</response>
-        /// <response code="404">Pedido com o id informado não encontrado</response>
+        /// <response code="200">Retorna os detalhes do pedido encontrado</response>
+        /// <response code="404">Pedido com o Id informado não encontrado</response>
         [HttpGet("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

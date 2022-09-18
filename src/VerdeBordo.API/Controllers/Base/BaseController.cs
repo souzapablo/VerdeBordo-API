@@ -12,9 +12,21 @@ namespace VerdeBordo.API.Controllers.Base
             where T : IBaseResponse, new()
         {
             var messageHandler = HttpContext is not null ? HttpContext.RequestServices.GetService<IMessageHandler>() : default;
-
+            
             if (messageHandler?.HasMessage == true)
             {
+
+                if (messageHandler.Messages.Where(x => x.Key == "001").Any())
+                {
+                    return new NotFoundObjectResult(new
+                    {
+                        Success = false,
+                        Status = HttpStatusCode.NotFound,
+                            Message = messageHandler.Messages
+                            .Select(x => x.Value)
+                    });
+                }
+
                 return BadRequest(new
                 {
                     Succes = false,
