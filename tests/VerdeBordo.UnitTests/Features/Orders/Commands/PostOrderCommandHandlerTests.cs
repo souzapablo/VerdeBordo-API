@@ -16,7 +16,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         }
 
         [Fact]
-        public async Task Given_AValidPostOrderCommand_When_CommandIsExecuted_OrderIsSavedInDatabase()
+        public async Task Given_AValidPostOrderCommand_When_CommandIsExecuted_Should_SaveOrderInDatabase()
         {
             // Arrange
             PostOrderCommand command = new()

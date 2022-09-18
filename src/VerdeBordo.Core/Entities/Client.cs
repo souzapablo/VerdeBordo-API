@@ -29,7 +29,5 @@ namespace VerdeBordo.Core.Entities
         public List<Order> Orders { get; private set; }
 
         #endregion
-
-        public void AddOrder(Order order) => Orders.Add(order);
     }
 }

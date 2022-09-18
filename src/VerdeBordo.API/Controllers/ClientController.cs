@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Clients.Commands.PostClient;
 using VerdeBordo.Application.Features.Clients.Queries.GetAllClients;
 using VerdeBordo.Application.Features.Clients.Queries.GetClientById;
 using VerdeBordo.Controllers.Responses;
@@ -55,5 +56,25 @@ namespace VerdeBordo.API.Controllers
             
             return CreateCustomResponse<SuccessResponse>(client);
         }
+
+        /// <summary>
+        /// Cria um novo cliente
+        /// </summary>
+        /// <returns>Cliente criado</returns>
+        /// <param name="command">Objeto contendo nome e contato do cliente a ser criado</param>
+        /// <response code="201">Cliente criado com sucesso</response>
+        /// <response code="400">Informações inválidas</response>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PostClientAsync([FromBody] PostClientCommand command)
+        {
+            var clientId = await _mediator.Send(command);
+
+            if (clientId is null)
+                return CreateCustomResponse<BadRequestResponse>(clientId.HasValue);
+
+            return CreatedAtAction(nameof(GetById), new {ClientId = clientId}, command);
+        }        
     }
 }
