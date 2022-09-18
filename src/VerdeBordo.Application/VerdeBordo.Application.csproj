@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VerdeBordo.Infrastructure\VerdeBordo.Infrastructure.csproj" />
+    <ProjectReference Include="..\VerdeBordo.Core\VerdeBordo.Core.csproj" />
+  </ItemGroup>
+
 </Project>
