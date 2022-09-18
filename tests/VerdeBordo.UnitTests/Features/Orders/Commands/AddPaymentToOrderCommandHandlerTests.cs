@@ -34,7 +34,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             await _commandHandler.Handle(command, new CancellationToken());
 
             // Assert
-            order.Payments.Count.Should().Be(1);
+            order.Payments.Should().HaveCount(1);
             order.Payments[0].PaymentDate.Should().Be(new DateTime(2022, 9, 12));
             order.PayedAmount.Should().Be(2m);
             _paymentRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Payment>()), Times.Once);
@@ -58,7 +58,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             await _commandHandler.Handle(command, new CancellationToken());
 
             // Assert
-            order.Payments.Count.Should().Be(0);
+            order.Payments.Should().HaveCount(0);
             order.PayedAmount.Should().Be(0);
             _paymentRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Payment>()), Times.Never);
             _orderRepoistoryMock.Verify(x => x.UpdateAsync(order), Times.Never);
@@ -71,7 +71,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             // Arrange
             Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
             order.SetDeliveryFee(2m);
-            order.AddEmbroidery(new("Bordado", 2m));
+            order.AddEmbroidery(new("Bordado", 2m, 1));
             order.AddPayment(new(DateTime.Now, 4m, 1));
 
             AddPaymentToOrderCommand command = new()
@@ -99,7 +99,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
             // Arrange
             Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
             order.SetDeliveryFee(2m);
-            order.AddEmbroidery(new("Bordado", 2m));
+            order.AddEmbroidery(new("Bordado", 2m, 1));
             order.AddPayment(new(DateTime.Now, 5m, 1));
 
             AddPaymentToOrderCommand command = new()

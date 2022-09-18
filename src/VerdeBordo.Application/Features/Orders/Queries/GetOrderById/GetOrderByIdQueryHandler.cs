@@ -18,7 +18,7 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetOrderById
 
         public async Task<OrderDetailsVm?> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetByIdAsync(request.OrderId, x => x.Payments);
+            var order = await _orderRepository.GetByIdAsync(request.OrderId, x => x.Payments, x => x.Embroideries);
 
             if (order is null)
                 return null;

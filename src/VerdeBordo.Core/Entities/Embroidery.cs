@@ -7,8 +7,9 @@ namespace VerdeBordo.Core.Entities
         
         #region Constructors
 
-        public Embroidery(string description, decimal price)
+        public Embroidery(string description, decimal price, int orderId)
         {
+            OrderId = orderId;
             Description = description;
             Price = price;
         }

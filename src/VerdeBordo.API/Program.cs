@@ -20,6 +20,7 @@ builder.Services.AddDbContext<VerdeBordoDbContext>(options => options.UseSqlServ
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IEmbroideryRepository, EmbroideryRepository>();
 builder.Services.AddScoped<IMessageHandler, MessageHandler>();
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<PostOrderCommandValidator>();

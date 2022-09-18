@@ -7,7 +7,7 @@ namespace VerdeBordo.UnitTests.Entities
         {
             // Arange
             Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
-            Embroidery embroidery = new("Novo bordado", 2.25m);
+            Embroidery embroidery = new("Novo bordado", 2.25m, 1);
 
             // Act
             order.AddEmbroidery(embroidery);
@@ -37,7 +37,7 @@ namespace VerdeBordo.UnitTests.Entities
         {
             // Arrange
             Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
-            Embroidery embroidery = new("Novo bordado", 2.25m);
+            Embroidery embroidery = new("Novo bordado", 2.25m, 1);
             order.AddEmbroidery(embroidery);
 
             // Act

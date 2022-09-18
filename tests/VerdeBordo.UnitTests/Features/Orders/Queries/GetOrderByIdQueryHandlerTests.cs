@@ -23,7 +23,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
             order.SetDeliveryFee(2m);
             var client = new Client("Nelson", "@nelson");
 
-            _orderRepositoryMock.Setup(x => x.GetByIdAsync(1, x => x.Payments))
+            _orderRepositoryMock.Setup(x => x.GetByIdAsync(1, x => x.Payments, x => x.Embroideries))
                 .ReturnsAsync(order);
 
             _clientRepositoryMock.Setup(x => x.GetByIdAsync(2))
