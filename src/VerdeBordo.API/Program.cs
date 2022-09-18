@@ -19,6 +19,7 @@ var connectionString = builder.Configuration.GetConnectionString("VerdeBordoCs")
 builder.Services.AddDbContext<VerdeBordoDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IMessageHandler, MessageHandler>();
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<PostOrderCommandValidator>();

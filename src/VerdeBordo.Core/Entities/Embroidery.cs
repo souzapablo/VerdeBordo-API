@@ -17,6 +17,7 @@ namespace VerdeBordo.Core.Entities
 
         #region Properties
 
+        public int OrderId { get; set; }
         public string Description { get; private set; }
         public decimal Price { get; private set; }
 

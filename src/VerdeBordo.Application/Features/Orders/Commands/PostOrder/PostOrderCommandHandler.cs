@@ -27,7 +27,10 @@ namespace VerdeBordo.Application.Features.Orders.Commands.PostOrder
             if (_messageHandler.HasMessage)
                 return null;
                 
-            Order order = new(request.OrderDate, request.ClientId, request.PaymentMethod, request.IsPromptDelivery, request.DeliveryFee);
+            Order order = new(request.OrderDate, request.ClientId, request.PaymentMethod, request.IsPromptDelivery);
+
+            if (request.DeliveryFee.HasValue)
+                order.SetDeliveryFee(request.DeliveryFee.Value);
 
             await _orderRepository.AddAsync(order);
 

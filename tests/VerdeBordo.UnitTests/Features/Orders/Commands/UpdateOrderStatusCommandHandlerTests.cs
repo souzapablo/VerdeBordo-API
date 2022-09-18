@@ -18,7 +18,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AValidStatusForOrder_When_CommandIsExcecuted_Should_UpdateOrderStatus()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true, 15m);
+            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true);
             UpdateOrderStatusCommand command = new() 
             {
                  OrderId = 1, 
@@ -40,7 +40,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_DeliveredStatusAndStatusIsDelivering_When_CommandIsExcecuted_Should_UpdateOrderStatusAndDeliveredAt()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true, 15m);
+            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true);
             UpdateOrderStatusCommand command = new() 
             {
                  OrderId = 1, 
@@ -64,7 +64,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_DeliveredStatusAndStatusIsNotDelivering_When_CommandIsExcecuted_Should_ReturnMessage()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true, 15m);
+            Order order = new(DateTime.Now, 1, PaymentMethod.PagSeguro, true);
             UpdateOrderStatusCommand command = new() 
             {
                  OrderId = 1, 

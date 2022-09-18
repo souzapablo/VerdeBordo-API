@@ -16,11 +16,11 @@ namespace VerdeBordo.Infrastructure.Persistence.Configurations
 
             builder.HasMany(o => o.Embroideries)
                 .WithOne()
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.OrderId);
 
             builder.HasMany(o => o.Payments)
                 .WithOne()
-                .HasForeignKey(p => p.Id);
+                .HasForeignKey(p => p.OrderId);
 
             builder.Property(o => o.DeliveryFee)
                 .HasPrecision(18, 4);

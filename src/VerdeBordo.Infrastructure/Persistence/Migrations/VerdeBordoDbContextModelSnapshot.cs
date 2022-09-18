@@ -52,7 +52,10 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("VerdeBordo.Core.Entities.Embroidery", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -64,11 +67,16 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 4)
                         .HasColumnType("decimal(18,4)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Embroideries");
                 });
@@ -127,13 +135,19 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("VerdeBordo.Core.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -144,6 +158,8 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Payments");
                 });
 
@@ -151,7 +167,7 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("VerdeBordo.Core.Entities.Order", null)
                         .WithMany("Embroideries")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -171,7 +187,7 @@ namespace VerdeBordo.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("VerdeBordo.Core.Entities.Order", null)
                         .WithMany("Payments")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

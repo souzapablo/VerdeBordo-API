@@ -22,7 +22,7 @@ namespace VerdeBordo.UnitTests.Entities
         {
             // Arange
             Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
-            Payment payment = new(DateTime.Now, 2.25m);
+            Payment payment = new(DateTime.Now, 2.25m, 1);
 
             // Act
             order.AddPayment(payment);

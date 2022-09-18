@@ -16,15 +16,13 @@ namespace VerdeBordo.Core.Entities
             Payments = new();
         }
         
-        public Order(DateTime orderDate, int clientId, PaymentMethod paymentMethod, bool promptDelivery, decimal? deliveryFee = null)
+        public Order(DateTime orderDate, int clientId, PaymentMethod paymentMethod, bool promptDelivery)
         {
             OrderDate = orderDate;
             ClientId = clientId;
             PaymentMethod = paymentMethod;
             PromptDelivery = promptDelivery;
-            DeliveryFee = deliveryFee;
             OrderStatus = OrderStatus.Created;
-
             Embroideries = new();
             Payments = new();
         }

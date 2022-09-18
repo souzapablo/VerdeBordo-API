@@ -19,7 +19,8 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
         {
             // Arrange
             var query = new GetOrderByIdQuery(1);
-            var order = new Order(new DateTime(2022, 12, 1), 2, PaymentMethod.PicPay, true, 15m);
+            var order = new Order(new DateTime(2022, 12, 1), 2, PaymentMethod.PicPay, true);
+            order.SetDeliveryFee(2m);
             var client = new Client("Nelson", "@nelson");
 
             _orderRepositoryMock.Setup(x => x.GetByIdAsync(1))
@@ -37,8 +38,9 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
             result?.ClientName.Should().Be("Nelson");
             result?.PaymentMethod.Should().Be("PicPay");
             result?.IsPromptDelivery.Should().Be(true);
-            result?.DeliveryFee.Should().Be(15m);
+            result?.DeliveryFee.Should().Be(2m);
             result?.OrderStatus.Should().Be("Criado");
+            result?.OrderTotalValue.Should().Be(4m);
         }
 
         [Fact]

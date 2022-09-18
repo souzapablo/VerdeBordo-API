@@ -18,7 +18,7 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetOrderById
 
         public async Task<OrderDetailsVm?> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetByIdAsync(request.OrderId);
+            var order = await _orderRepository.GetByIdAsync(request.OrderId, x => x.Payments);
 
             if (order is null)
                 return null;
@@ -41,7 +41,8 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetOrderById
                 PaymentMethod = EnumExtensions<PaymentMethod>.GetDescription(order.PaymentMethod),
                 DeliveryFee = order.DeliveryFee,
                 ClientName = client.Name,
-                IsDeleted = order.IsDeleted
+                IsDeleted = order.IsDeleted,
+                OrderTotalValue = order.OrderPrice
             };
         }
     }

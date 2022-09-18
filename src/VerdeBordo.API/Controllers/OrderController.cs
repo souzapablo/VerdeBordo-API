@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Orders.Commands.AddPaymentToOrder;
 using VerdeBordo.Application.Features.Orders.Commands.DeleteOrder;
 using VerdeBordo.Application.Features.Orders.Commands.PostOrder;
 using VerdeBordo.Application.Features.Orders.Commands.UpdateOrderStatus;
@@ -103,7 +104,7 @@ namespace VerdeBordo.API.Controllers
         /// <param name="command">Objeto para atualização do pedido contendo novo status e data de entrega, quando necessária</param>
         /// <response code="204">Pedido atualizado com sucesso</response>
         /// <response code="400">Atualização de pedido não realizada </response>
-        [HttpPatch("{orderId}")]
+        [HttpPatch("{orderId}/update-status")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateOrderStatusAsync(int orderId, [FromBody] UpdateOrderStatusCommand command)
@@ -113,6 +114,29 @@ namespace VerdeBordo.API.Controllers
             var result = await _mediator.Send(command);
 
             return CreateCustomResponse<NoContentResponse>(result);
+        }
+
+        /// <summary>
+        /// Adiciona um pagamento ao pedido
+        /// </summary>
+        /// <returns>Objeto do pagamento adicionado</returns>
+        /// <param name="orderId">Id do pedido a ser atualiazdo</param>
+        /// <param name="command">Objeto para atualização do pedido contendo data e vakir do pagamento</param>
+        /// <response code="204">Pedido atualizado com sucesso</response>
+        /// <response code="400">Atualização de pedido não realizada </response>
+        [HttpPatch("{orderId}/add-payment")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddPaymentToOrder(int orderId, [FromBody] AddPaymentToOrderCommand command)
+        {
+            command.OrderId = orderId;
+
+            var result = await _mediator.Send(command);
+
+            if (result is null)
+                return CreateCustomResponse<BadRequestResponse>(orderId);
+
+            return CreateCustomResponse<SuccessResponse>(result);
         }
     }
 }

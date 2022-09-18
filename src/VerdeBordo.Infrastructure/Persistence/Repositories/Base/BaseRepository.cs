@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using VerdeBordo.Core.Entities.Base;
 using VerdeBordo.Core.Persistence.Interfaces.Base;
@@ -13,15 +14,24 @@ namespace VerdeBordo.Infrastructure.Persistence.Repositories.Base
             _dbContext = dbContext;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            var query = _dbContext.Set<T>().AsQueryable();
+
+            if (includes != null)
+                query = includes.Aggregate(query, (current, include) => current.Include(include));
+
+            return await query.ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
         {
-            return await _dbContext.Set<T>()
-                .SingleOrDefaultAsync(x => x.Id == id);
+            var query = _dbContext.Set<T>().AsQueryable();
+
+            if (includes != null)
+                query = includes.Aggregate(query, (current, include) => current.Include(include));
+
+            return await query.Where(x => x.Id.Equals(id)).SingleOrDefaultAsync();
         }
 
         public async Task AddAsync(T entity)
