@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Clients.Commands.DeleteClient;
 using VerdeBordo.Application.Features.Clients.Commands.PostClient;
 using VerdeBordo.Application.Features.Clients.Queries.GetAllClients;
 using VerdeBordo.Application.Features.Clients.Queries.GetClientById;
@@ -75,6 +76,23 @@ namespace VerdeBordo.API.Controllers
                 return CreateCustomResponse<BadRequestResponse>(clientId.HasValue);
 
             return CreatedAtAction(nameof(GetById), new {ClientId = clientId}, command);
-        }        
+        }
+
+        /// <summary>
+        /// Deleta logicamente um client
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="clientId">Id do cliente a ser deletado</param>
+        /// <response code="204">Cliente deletado com sucesso</response>
+        /// <response code="400">Cliente não encontrado ou já havia sido deletado </response>
+        [HttpDelete("{clientId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]   
+        public async Task<IActionResult> DeleteClientAsync(int clientId)
+        {
+            var result = await _mediator.Send(new DeleteClientCommand(clientId));
+
+            return CreateCustomResponse<NoContentResponse>(result);
+        }
     }
 }
