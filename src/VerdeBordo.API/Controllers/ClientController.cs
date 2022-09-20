@@ -5,6 +5,7 @@ using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
 using VerdeBordo.Application.Features.Clients.Commands.DeleteClient;
 using VerdeBordo.Application.Features.Clients.Commands.PostClient;
+using VerdeBordo.Application.Features.Clients.Commands.UpdateClient;
 using VerdeBordo.Application.Features.Clients.Queries.GetAllClients;
 using VerdeBordo.Application.Features.Clients.Queries.GetClientById;
 using VerdeBordo.Controllers.Responses;
@@ -79,7 +80,7 @@ namespace VerdeBordo.API.Controllers
         }
 
         /// <summary>
-        /// Deleta logicamente um client
+        /// Deleta logicamente um cliente
         /// </summary>
         /// <returns></returns>
         /// <param name="clientId">Id do cliente a ser deletado</param>
@@ -94,5 +95,27 @@ namespace VerdeBordo.API.Controllers
 
             return CreateCustomResponse<NoContentResponse>(result);
         }
+
+        /// <summary>
+        /// Atualiza um cliente
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="clientId">Id do cliente a ser atualizado</param>
+        /// <param name="command">Objeto contendo novo nome e/ou novoc contato do cliente</param>
+        /// <response code="204">Cliente atualizado com sucesso</response>
+        /// <response code="400">Cliente não encontrado ou objeto para atualizaçao inválido </response>
+        [HttpPut("{clientId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateClientAsync(int clientId, [FromBody] UpdateClientCommand command)
+        {
+            command.ClientId = clientId;
+            var result = await _mediator.Send(command);
+
+            if (result is null)
+                return CreateCustomResponse<BadRequestResponse>(clientId);
+
+            return CreateCustomResponse<SuccessResponse>(result);
+        }      
     }
 }

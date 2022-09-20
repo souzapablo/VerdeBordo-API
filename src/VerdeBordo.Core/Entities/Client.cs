@@ -29,5 +29,13 @@ namespace VerdeBordo.Core.Entities
         public List<Order> Orders { get; private set; }
 
         #endregion
+
+        #region Methods
+
+        public void SetName(string name) => Name = name;
+
+        public void SetContact(string contact) => Contact = contact;
+
+        #endregion
     }
 }
