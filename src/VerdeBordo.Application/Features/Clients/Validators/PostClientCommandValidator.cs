@@ -20,7 +20,7 @@ namespace VerdeBordo.Application.Features.Clients.Validators
                 .WithMessage("O nome do cliente deve ser informado.");
             
             RuleFor(x => x.Contact)
-                .MaximumLength(3)
+                .MinimumLength(3)
                 .WithMessage("O contato deve conter no mínimo 3 caracteres.")
                 .MaximumLength(255)
                 .WithMessage("O contato deve conter no máximo 255 caracteres.")

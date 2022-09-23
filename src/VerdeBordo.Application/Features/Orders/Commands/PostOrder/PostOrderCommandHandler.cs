@@ -9,10 +9,10 @@ namespace VerdeBordo.Application.Features.Orders.Commands.PostOrder
     public class PostOrderCommandHandler : IRequestHandler<PostOrderCommand, int?>
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly IOrderRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly IMessageHandler _messageHandler;
 
-        public PostOrderCommandHandler(IOrderRepository orderRepository, IOrderRepository clientRepository, 
+        public PostOrderCommandHandler(IOrderRepository orderRepository, IClientRepository clientRepository, 
             IMessageHandler messageHandler)
         {
             _orderRepository = orderRepository;

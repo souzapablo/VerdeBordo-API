@@ -6,7 +6,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
     public class PostOrderCommandHandlerTests
     {
         private readonly Mock<IOrderRepository> _orderRepositoryMock = new();
-        private readonly Mock<IOrderRepository> _clientRepositoryMock = new();
+        private readonly Mock<IClientRepository> _clientRepositoryMock = new();
         private readonly Mock<MessageHandler> _messageHandlerMock = new();
         private readonly PostOrderCommandHandler _commandHandler;
 
