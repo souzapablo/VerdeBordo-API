@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using VerdeBordo.API.Controllers.Base;
 using VerdeBordo.API.Controllers.Responses;
+using VerdeBordo.Application.Features.Orders.Commands.AddDeliveryFeeToOrder;
 using VerdeBordo.Application.Features.Orders.Commands.AddEmbroideryToOrder;
 using VerdeBordo.Application.Features.Orders.Commands.AddPaymentToOrder;
 using VerdeBordo.Application.Features.Orders.Commands.DeleteOrder;
@@ -35,18 +36,18 @@ namespace VerdeBordo.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllAsync()
         {
-            var order = await _mediator.Send(new GetAllOrdersQuery());
+            var orders = await _mediator.Send(new GetAllOrdersQuery());
             
-            return CreateCustomResponse<SuccessResponse>(order);
+            return CreateCustomResponse<SuccessResponse>(orders);
         }
 
         /// <summary>
         /// Busca o pedido pelo Id
         /// </summary>
-        /// <returns>Pedidos cadastrados</returns>
+        /// <returns>Detalhes do pedido</returns>
         /// <param name="orderId">Id do pedido a ser encontrado</param>
-        /// <response code="200">Retorna o pedido encontrado</response>
-        /// <response code="404">Pedido com o id informado não encontrado</response>
+        /// <response code="200">Retorna os detalhes do pedido encontrado</response>
+        /// <response code="404">Pedido com o Id informado não encontrado</response>
         [HttpGet("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -145,13 +146,36 @@ namespace VerdeBordo.API.Controllers
         /// </summary>
         /// <returns>Objeto do bordado adicionado</returns>
         /// <param name="orderId">Id do pedido a ser atualiazdo</param>
-        /// <param name="command">Objeto para atualização do pedido descrição e valor do bordado</param>
+        /// <param name="command">Objeto para atualização do pedido com descrição e valor do bordado</param>
         /// <response code="204">Pedido atualizado com sucesso</response>
         /// <response code="400">Atualização de pedido não realizada </response>
         [HttpPatch("{orderId}/add-embroidery")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddEmbroideryToOrderAsync(int orderId, [FromBody] AddEmbroideryToOrderCommand command)
+        {
+            command.OrderId = orderId;
+
+            var result = await _mediator.Send(command);
+
+            if (result is null)
+                return CreateCustomResponse<BadRequestResponse>(orderId);
+
+            return CreateCustomResponse<SuccessResponse>(result);
+        }
+
+        /// <summary>
+        /// Adiciona valor da entrega ao pedido
+        /// </summary>
+        /// <returns>Valor da entrega</returns>
+        /// <param name="orderId">Id do pedido a ser atualiazdo</param>
+        /// <param name="command">Objeto para atualização do pedido com o valor da entrega</param>
+        /// <response code="204">Pedido atualizado com sucesso</response>
+        /// <response code="400">Atualização de pedido não realizada </response>
+        [HttpPatch("{orderId}/add-delivery-fee")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddDeliveryFeeToOrderAsync(int orderId, [FromBody] AddDeliveryFeeToOrderCommand command)
         {
             command.OrderId = orderId;
 
