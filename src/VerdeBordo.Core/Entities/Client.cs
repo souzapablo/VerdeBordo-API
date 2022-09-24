@@ -7,6 +7,11 @@ namespace VerdeBordo.Core.Entities
 
         #region Constructors
 
+        public Client()
+        { 
+            Orders = new();
+        }
+
         public Client(string name, string contact) 
         {
             Name = name;
@@ -19,9 +24,17 @@ namespace VerdeBordo.Core.Entities
 
         #region Properties
 
-        public string Name { get; private set; }
-        public string Contact { get; private set; }
+        public string Name { get; private set; } = null!;
+        public string Contact { get; private set; } = null!;
         public List<Order> Orders { get; private set; }
+
+        #endregion
+
+        #region Methods
+
+        public void SetName(string name) => Name = name;
+
+        public void SetContact(string contact) => Contact = contact;
 
         #endregion
     }

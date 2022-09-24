@@ -21,7 +21,7 @@ namespace VerdeBordo.Application.Features.Orders.Queries.GetAllOrders
             return orders.Select(x => new OrderListVm
             {
                 OrderId = x.Id,
-                ClientName = x.Client != null ? x.Client.Name : string.Empty,
+                ClientId = x.ClientId,
                 OrderDate = x.OrderDate,
                 OrderPrice = x.OrderPrice,
                 DeliveryFee = x.DeliveryFee,
