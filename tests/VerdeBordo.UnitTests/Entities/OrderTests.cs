@@ -6,7 +6,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidEmbroidery_When_AddedToOrderEmbroideriesList_Should_UpdateOrderPrice()
         {
             // Arange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, false);
             Embroidery embroidery = new("Novo bordado", 2.25m, 1);
 
             // Act
@@ -21,7 +21,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidPayment_When_AddedToOrderPaymentList_Should_IncreasePayedAmount()
         {
             // Arange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, false);
             Payment payment = new(DateTime.Now, 2.25m, 1);
 
             // Act
@@ -36,7 +36,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_NotNullDeliveryFee_When_DeliveryFeeIsAdded_Should_IncreaseOrderPrive()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, false);
             Embroidery embroidery = new("Novo bordado", 2.25m, 1);
             order.AddEmbroidery(embroidery);
 
@@ -52,7 +52,7 @@ namespace VerdeBordo.UnitTests.Entities
         public void Given_AValidStatus_When_DeliveryIsRecorded_Should_ChangeStatus()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, false);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, false);
             order.SetStatus(OrderStatus.Delivering);
 
             // Act

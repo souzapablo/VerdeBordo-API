@@ -19,7 +19,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Queries
         {
             // Arrange
             var query = new GetOrderByIdQuery(1);
-            var order = new Order(new DateTime(2022, 12, 1), 2, PaymentMethod.PicPay, true);
+            var order = new Order(new DateTime(2022, 12, 1), 1, 2, PaymentMethod.PicPay, true);
             order.SetDeliveryFee(2m);
             var client = new Client("Nelson", "@nelson");
 

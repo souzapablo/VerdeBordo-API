@@ -16,9 +16,10 @@ namespace VerdeBordo.Core.Entities
             Payments = new();
         }
         
-        public Order(DateTime orderDate, int clientId, PaymentMethod paymentMethod, bool promptDelivery)
+        public Order(DateTime orderDate, int userId, int clientId, PaymentMethod paymentMethod, bool promptDelivery)
         {
             OrderDate = orderDate;
+            UserId = userId;
             ClientId = clientId;
             PaymentMethod = paymentMethod;
             PromptDelivery = promptDelivery;
@@ -32,6 +33,8 @@ namespace VerdeBordo.Core.Entities
         #region Properties
 
         public DateTime OrderDate { get; private set; }
+        public int UserId { get; private set; }
+        public User? User { get; private set; }
         public int ClientId { get; private set; }
         public Client? Client { get; private set; }
         public List<Embroidery> Embroideries { get; private set; }

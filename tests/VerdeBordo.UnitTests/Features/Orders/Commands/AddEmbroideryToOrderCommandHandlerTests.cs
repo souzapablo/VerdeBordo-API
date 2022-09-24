@@ -18,7 +18,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AValidEmbroidery_When_CommandIsExcecuted_Should_AddEmbroideryToOrder()
         {
             // Assert
-            Order order = new(DateTime.Now, 1, PaymentMethod.PicPay, true);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.PicPay, true);
             AddEmbroideryToOrderCommand command = new()
             {
                 OrderId = 1,
@@ -43,7 +43,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AnInalidOrder_When_CommandIsExcecuted_Should_ReturnMessage()
         {
             // Assert
-            Order order = new(DateTime.Now, 1, PaymentMethod.PicPay, true);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.PicPay, true);
             AddEmbroideryToOrderCommand command = new()
             {
                 OrderId = 1,

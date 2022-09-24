@@ -18,7 +18,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AValidPaymentToAOrderPendingPayment_When_CommandIsExecuted_Should_AddPaymentToOrderAndIncreasePayedAmount()
         {
             // Arrange
-            Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
+            Order order = new Order(DateTime.Now, 1, 1, PaymentMethod.PicPay, false);
             order.SetDeliveryFee(2m);
             AddPaymentToOrderCommand command = new()
             {
@@ -45,7 +45,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AnInvalidOrderId_When_CommandIsExecuted_Should_ReturnMessage()
         {
             // Arrange
-            Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
+            Order order = new Order(DateTime.Now, 1, 1, PaymentMethod.PicPay, false);
 
             AddPaymentToOrderCommand command = new()
             {
@@ -69,7 +69,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_TotallyPayedOrder_When_CommandIsExecuted_Should_ReturnAlreadyPayedMessage()
         {
             // Arrange
-            Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
+            Order order = new Order(DateTime.Now, 1, 1, PaymentMethod.PicPay, false);
             order.SetDeliveryFee(2m);
             order.AddEmbroidery(new("Bordado", 2m, 1));
             order.AddPayment(new(DateTime.Now, 4m, 1));
@@ -97,7 +97,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_PaymentAmountIsGreatherThanOrderPrice_When_CommandIsExecuted_Should_ReturnPaymentExceedsOrderPriceMessage()
         {
             // Arrange
-            Order order = new Order(DateTime.Now, 1, PaymentMethod.PicPay, false);
+            Order order = new Order(DateTime.Now, 1, 1, PaymentMethod.PicPay, false);
             order.SetDeliveryFee(2m);
             order.AddEmbroidery(new("Bordado", 2m, 1));
             order.AddPayment(new(DateTime.Now, 5m, 1));

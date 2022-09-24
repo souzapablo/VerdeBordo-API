@@ -17,7 +17,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AValidDeliveryFeeCommand_When_CommandIsExecuted_Should_ChangeDeliveryFee()
         {
             // Arrange
-            Order order = new(DateTime.Now, 2, PaymentMethod.Pix, false);
+            Order order = new(DateTime.Now, 1, 2, PaymentMethod.Pix, false);
             AddDeliveryFeeToOrderCommand command = new()
             {
                 OrderId = 1,
@@ -39,7 +39,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AnInvalidOrder_When_CommandIsExecuted_Should_ReturnMessage()
         {
             // Arrange
-            Order order = new(DateTime.Now, 2, PaymentMethod.Pix, false);
+            Order order = new(DateTime.Now, 1, 2, PaymentMethod.Pix, false);
             AddDeliveryFeeToOrderCommand command = new()
             {
                 OrderId = 1,

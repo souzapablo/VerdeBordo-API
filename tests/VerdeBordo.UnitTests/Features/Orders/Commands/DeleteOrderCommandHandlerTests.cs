@@ -16,7 +16,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_AValidOrderId_When_CommandIsExecuted_Should_SetIsDeletedTrue()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, true);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, true);
             DeleteOrderCommand command = new(1);
 
             _orderRepositoryMock.Setup(x => x.GetByIdAsync(1))
@@ -47,7 +47,7 @@ namespace VerdeBordo.UnitTests.Features.Orders.Commands
         public async Task Given_ADeletedOrder_When_CommandIsExecuted_Should_ReturnMessage()
         {
             // Arrange
-            Order order = new(DateTime.Now, 1, PaymentMethod.BankTransfer, true);
+            Order order = new(DateTime.Now, 1, 1, PaymentMethod.BankTransfer, true);
             DeleteOrderCommand command = new(1);
             order.SetIsDeleted(true);
 
